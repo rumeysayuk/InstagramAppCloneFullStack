@@ -4,7 +4,7 @@ const {
     INVALID_EMAIL,
     MIN_LENGTH_ERROR,
     REQUIRED_ERROR
-} =require("../constants/messages/globalMessages") ;
+} = require("../constants/messages/globalMessages");
 const {PASSWORD_MIN_LENGTH_ERROR} = "../constants/messages/authMessages";
 
 const Schema = mongoose.Schema;
@@ -13,12 +13,12 @@ const UserSchema = new Schema({
     firstname: {
         type: String,
         required: [true, REQUIRED_ERROR("İsim")],
-        minlength: [3, MIN_LENGTH_ERROR("İsminiz",3)]
+        minlength: [3, MIN_LENGTH_ERROR("İsminiz", 3)]
     },
     lastname: {
         type: String,
         required: [true, REQUIRED_ERROR("Soyad")],
-        minlength: [3, MIN_LENGTH_ERROR("Soyadınız",3)]
+        minlength: [3, MIN_LENGTH_ERROR("Soyadınız", 3)]
     },
     email: {
         type: String,

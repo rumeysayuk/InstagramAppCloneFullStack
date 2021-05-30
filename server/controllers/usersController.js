@@ -11,8 +11,8 @@ const addUser=async()=>{
 await User.create({
     firstname:"Rümeysa",
     lastname:"Yük",
-    email:"rumeysayuk10@gmail.com",
-    password:"1234567",
+    email:"rumeysayuk80@gmail.com",
+    password:"12377777",
 });
 }
 module.exports={
