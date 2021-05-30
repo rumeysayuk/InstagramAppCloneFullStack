@@ -1,12 +1,11 @@
-
-export const getItem=(key,value)=>{
-    localStorage.getItem(key,value);
+export const getUser = () => {
+    return JSON.parse(localStorage.getItem("profile"));
 }
 
-export const removeItem=(key)=>{
-    localStorage.removeItem(key);
+export const addUser = (user) => {
+    localStorage.setItem("profile", JSON.stringify(user));
 }
-export const clear=()=>{
-    localStorage.clear();
+export const removeUser = (user) => {
+    localStorage.removeItem("profile");
 }
 

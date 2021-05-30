@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import Posts from "./components/Posts/Posts";
 import * as services from "./services/index";
 import {getAllPosts} from "./actions/posts";
@@ -25,7 +25,6 @@ const App = () => {
 
             </Container>
         </BrowserRouter>
-
     )
 }
 
