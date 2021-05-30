@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import Posts from "./components/Posts/Posts";
+import * as services from "./services/index";
+import {getAllPosts} from "./actions/posts";
+import {useDispatch} from "react-redux";
+import Navbar from "./components/Navbar/Navbar";
+import {BrowserRouter, Route, Switch} from "react-router-dom"
+import {Container} from "@material-ui/core";
+import Auth from "./components/Auth/Auth";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAllPosts())
+    }, []);
+    return (
+        <BrowserRouter>
+            <Container maxWidth={"lg"}>
+                <Navbar/>
+                    <Switch>
+                        <Route path={"/"} exact component={Posts}/>
+                        <Route path={"/auth"}  component={Auth}/>
+                    </Switch>
+
+            </Container>
+        </BrowserRouter>
+
+    )
 }
 
 export default App;
