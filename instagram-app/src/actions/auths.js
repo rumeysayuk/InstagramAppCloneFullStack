@@ -20,9 +20,6 @@ import * as authService from "../services/authService";
 // }
 //
 
-export const signUp = (user) => async (dispatch) => {
-    const response = await authService.signUpWithGoogle(user);
-}
 
 
 
