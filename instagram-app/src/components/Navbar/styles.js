@@ -14,6 +14,7 @@ export default makeStyles((theme) => ({
          flexDirection: "column",
       },
    },
+
    search: {
       display: "flex",
       alignItems: "center",

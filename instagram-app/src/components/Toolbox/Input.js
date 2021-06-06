@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {Grid, IconButton, InputAdornment, TextField} from "@material-ui/core";
 import {Visibility, VisibilityOff} from "@material-ui/icons";
 
@@ -25,4 +25,5 @@ const Input = ({name, handleChange, label, half, autoFocus, type, handleShowPass
         />
     </Grid>
 )
+
 export default Input;

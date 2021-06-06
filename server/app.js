@@ -1,14 +1,29 @@
-const express= require("express")
-const mongoose=require("mongoose")
-const app=express()
-const dotenv=require("dotenv")
-const databaseConnectionHelper=require("./helpers/database/databaseConnectionHelper")
-const routers=require("./routes")
-const cors=require("cors")
+const express = require("express")
+const dotenv = require("dotenv")
+const databaseConnectionHelper = require("./helpers/database/databaseConnectionHelper")
+const routes = require("./routes")
+const cors = require("cors")
+const bodyParser = require("body-parser")
+const session =require("express-session")
+//const  path=require("path")
+
+const app = express();
 
 dotenv.config({
-path:"./Config/environment/config.env",
+    path: "./config/environment/config.env",
 })
+
+app.use(bodyParser.json({limit: "30mb", extended: true}))
+app.use(bodyParser.urlencoded({limit: "30mb", extended: true}))
+
 app.use(cors())
-app.use("/api",routers);
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+}))
+app.use("/api", routes);
+
 databaseConnectionHelper(app);
+

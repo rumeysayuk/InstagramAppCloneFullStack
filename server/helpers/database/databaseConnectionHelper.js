@@ -1,22 +1,18 @@
 const mongoose = require("mongoose");
-const postsController=require("../../controllers/postsController")
 
 const databaseConnectionHelper = (app) => {
-    const PORT = process.env.PORT
+    const PORT = process.env.PORT;
     try {
-        mongoose.connect(process.env.MONGO_URL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        }).then(() => {
-            app.listen(PORT, () => {
-                console.log(`Server running on port: ${PORT}`)
+        mongoose
+            .connect(process.env.MONGO_URL, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true
             })
-        }).then(()=>{
-            postsController.addPost()
-        })
+            .then(() => app.listen(PORT, () =>
+                console.log(`Server Running on Port : ${PORT}`)))
     } catch (e) {
-        console.log(e.message);
+        console.log(e);
     }
 }
-module.exports=databaseConnectionHelper;
 
+module.exports = databaseConnectionHelper;

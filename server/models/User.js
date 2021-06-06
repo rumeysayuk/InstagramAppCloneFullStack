@@ -1,50 +1,46 @@
+const {EMAIL_UNIQUE_ERROR, PLEASE_PROVIDE_EMAIL, REQUIRED_ERROR} = require("../constants/messages/globalMessages");
+const {PASSWORD_MIN_LENGTH_ERROR} = require("../constants/messages/authMessages");
 const mongoose = require('mongoose')
-const {
-    EMAIL_UNIQUE_ERROR,
-    INVALID_EMAIL,
-    MIN_LENGTH_ERROR,
-    REQUIRED_ERROR
-} = require("../constants/messages/globalMessages");
-const {PASSWORD_MIN_LENGTH_ERROR} = "../constants/messages/authMessages";
-
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-    firstname: {
+    firstName: {
         type: String,
-        required: [true, REQUIRED_ERROR("İsim")],
-        minlength: [3, MIN_LENGTH_ERROR("İsminiz", 3)]
+        required: [true, REQUIRED_ERROR(this)],
     },
-    lastname: {
+
+    lastName: {
         type: String,
-        required: [true, REQUIRED_ERROR("Soyad")],
-        minlength: [3, MIN_LENGTH_ERROR("Soyadınız", 3)]
+        required: [true, REQUIRED_ERROR(this)],
     },
+
     email: {
         type: String,
+        required: [true, REQUIRED_ERROR(this)],
         unique: [true, EMAIL_UNIQUE_ERROR],
-        required: [true, REQUIRED_ERROR("Email")],
-        match: [/^([\w-.]+@([\w-]+.)+[\w-]{2,4})?$/, INVALID_EMAIL],
+        match: [/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/, PLEASE_PROVIDE_EMAIL],
     },
+
     password: {
         type: String,
-        required: [true, REQUIRED_ERROR("Şifre")],
         minlength: [6, PASSWORD_MIN_LENGTH_ERROR],
+        required: [true, REQUIRED_ERROR(this)],
         select: false,
-    },
-    blocked: {
-        type: Boolean,
-        default: false,
     },
     role: {
         type: String,
         default: "user",
         enum: ["user", "admin"]
     },
+
+    blocked: {
+        type: Boolean,
+        default: false
+    },
     createdAt: {
         type: Date,
         default: Date.now
-    }
-
+    },
 })
+
 module.exports = mongoose.model("Users", UserSchema);

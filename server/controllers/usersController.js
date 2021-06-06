@@ -1,23 +1,39 @@
-const User = require("../models/User");
+const User = require('../models/User');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const CustomError = require("../CustomError");
 
-const getAllUsers = async (req, res) => {
-   const users = await User.find();
-   return res.status(200).json({
-      success: true,
-      data: users
-   })
+const secret = "test";
+
+const signIn = async (req, res) => {
+    const {email, password} = req.body;
+    const oldUser = await User.findOne({email}).select("+password");
+    console.log(oldUser)
+    if (!oldUser) return res.status(404).json({message: "Böyle Bir Kullanıcı Bulunamadı"})
+
+    const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);
+    if (!isPasswordCorrect) return res.status(400).json({message: "Hatalı Şifre"});
+
+    const token = jwt.sign({email: oldUser.email, id: oldUser._id}, secret, {expiresIn: "1h"})
+
+    return res.status(200).json({result: oldUser, token})
 }
 
-const addUser = async () => {
-   await User.create({
-      firstname: "Rümeysa",
-      lastname: "Yük",
-      email: "rumeysayuk80@gmail.com",
-      password: "12377777",
-   });
+const signUp = async (req, res, next) => {
+    const {firstName, lastName, email, password, confirmPassword} = req.body;
+    if (password !== confirmPassword) return res.status(404).json({message: "Şifreler birbirinden farklı olamaz"})
+
+    const oldUser = await User.findOne({email})
+    if (oldUser) return res.status(400).json({message: "Bu Email'e Kayıtlı Kullanıcı Mevcut"})
+
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const result = await User.create({email, password: hashedPassword, firstName, lastName});
+    const token = jwt.sign({email: result.email, id: result._id}, secret, {expiresIn: "1h"})
+    return res.status(201).json({result, token})
 }
+
+
 module.exports = {
-   getAllUsers,
-   addUser,
-    signUpWithGoogle
+    signIn,
+    signUp,
 }

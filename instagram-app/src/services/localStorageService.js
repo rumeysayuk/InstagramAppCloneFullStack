@@ -1,11 +1,16 @@
-export const getUser = () => {
+const getUser = () => {
     return JSON.parse(localStorage.getItem("profile"));
 }
 
-export const addUser = (user) => {
+const addUser = (user) => {
     localStorage.setItem("profile", JSON.stringify(user));
 }
-export const removeUser = (user) => {
+const removeUser = () => {
     localStorage.removeItem("profile");
 }
 
+export default {
+    addUser,
+    removeUser,
+    getUser,
+}

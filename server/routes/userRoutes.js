@@ -1,9 +1,11 @@
-const express= require("express")
-const {signUpWithGoogle} = require("../controllers/usersController");
-const {getAllUsers} = require("../controllers/usersController");
+const express= require("express");
 const router=express.Router();
+const {signIn, signUp} = require("../controllers/usersController");
 
-router.get("/", getAllUsers)
-router.post("/signup-with-google", signUpWithGoogle)
+router.post("/signin",signIn);
+router.post("/signup",signUp);
 
-module.exports=router
+
+module.exports= router;
+
+

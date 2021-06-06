@@ -1,5 +1,4 @@
 import * as services from "../services";
-import {GET_ALL} from "../constants/actionTypes";
 import * as actionTypes from "../constants/actionTypes"
 
 export const getAllPosts = () => async (dispatch) => {
@@ -7,6 +6,12 @@ export const getAllPosts = () => async (dispatch) => {
     dispatch({
         type: actionTypes.GET_ALL, payload: response.data.data
     })
-
 }
+export const addPost = (postItem) => async (dispatch) => {
+    console.log(postItem)
+    const {data: {message, post: {items}}} = await services.addPost(postItem);
+    dispatch({type: actionTypes.ADD_POST, items})
+}
+
+
 
