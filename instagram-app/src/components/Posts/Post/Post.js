@@ -3,6 +3,7 @@ import {Card, CardActions, CardContent, CardMedia, IconButton, Typography, CardH
 import useStyles from "./styles";
 import {BookmarkBorderOutlined, ChatBubbleOutlineRounded, FavoriteBorder, MoreHoriz, SendRounded} from "@material-ui/icons";
 import {useDispatch} from "react-redux";
+import logo from "../../../assets/images/stars.jpg"
 const Post = ({post}) => {
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -29,9 +30,10 @@ const Post = ({post}) => {
                 }
                 title="Rümeysa Yük"
             />
+
             <CardMedia
                 className={classes.media}
-                image="https://hergunbiryildiz.files.wordpress.com/2017/12/stars-alnilam-mintaka-in-orion-celestial-image-picture-co.jpg?w=900"
+image={logo}
                 title="stars"
             />
             <CardActions disableSpacing className={classes.cardFooter}>
@@ -66,7 +68,7 @@ const Post = ({post}) => {
                                         fullWidth multiline/>
                             <br/>
                             <Button type={"submit"} onClick={postComment}
-                                    style={{float: "right", margin: "5px"}}>Gönder</Button>
+                                    style={{float: "right", margin: "5px"}}>Yorum yap</Button>
                         </form>
 
             </CardContent>

@@ -1,6 +1,7 @@
 const {EMAIL_UNIQUE_ERROR, PLEASE_PROVIDE_EMAIL, REQUIRED_ERROR} = require("../constants/messages/globalMessages");
 const {PASSWORD_MIN_LENGTH_ERROR} = require("../constants/messages/authMessages");
-const mongoose = require('mongoose')
+
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -42,5 +43,4 @@ const UserSchema = new Schema({
         default: Date.now
     },
 })
-
 module.exports = mongoose.model("Users", UserSchema);

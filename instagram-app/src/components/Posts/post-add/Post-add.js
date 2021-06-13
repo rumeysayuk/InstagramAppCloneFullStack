@@ -34,7 +34,7 @@ const PostAdd = () => {
                         <Input name={"title"} label={"Post başlığı"}
                                type={"text"} handleChange={handleChange}/>
                         <Input name={"description"} label={"İçeriği"} handleChange={handleChange}/>
-                        <Input type={"file"} name={"imageUrl"} label={"Resim"}  handleChange={handleChange}/>
+                        <Input type={"file"} name={"imageUrl"} label={"Resim"}   handleChange={handleChange}/>
                     </Grid>
                     <Button className={classes.submit} type={"submit"} fullWidth variant={"contained"} color={"primary"} onClick={switchMode}>Post ekle</Button>
                 </form>

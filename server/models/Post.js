@@ -13,6 +13,7 @@ const PostSchema = new Schema({
     },
     imageUrl:{
         type:String,
+        required:true,
     },
     description:{
         type: String,
@@ -20,7 +21,7 @@ const PostSchema = new Schema({
         minlength: [3, MIN_LENGTH_ERROR(this)]
     },
     comment:{
-        type: String,
+        type: String,//******[]
         required: [false],
         minlength: [3, MIN_LENGTH_ERROR(this)]
     },
