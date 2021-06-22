@@ -16,7 +16,7 @@ const Posts = () => {
                 {
                     posts.map((post) => (
                         <Grid key={post._id} item className={classes.postList}>
-                            <Post post={post} key={post._id}/>
+                            <Post post={post} key={post._id} />
                         </Grid>
                     ))
                 }

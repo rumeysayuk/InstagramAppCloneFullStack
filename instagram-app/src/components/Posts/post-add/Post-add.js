@@ -13,16 +13,30 @@ const PostAdd = () => {
     const [form, setForm] = useState()
     const history = useHistory();
     const dispatch = useDispatch();
-    const handleChange = (e) => setForm({...form, [e.target.name]: e.target.value})
-    const switchMode = () => {
+    const state={
+        title:'',
+        description:'',
+        image:null,
+    }
+   const handleImageChange = (e) => {
+        this.setState({ image: e.target.files[0] });
+    }
 
+   const handleChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value });
+    }
+
+    const switchMode = () => {
         setFill((prevIsSignUp) => !prevIsSignUp)
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (isFill) {
-            dispatch(addPost(form, history))
-        }
+       const data= new FormData();
+       data.append('image',this.state.imageUrl);
+       data.append('title',this.state.title);
+       data.append('description',this.state.description);
+
+
         history.push(routes.HOMEPAGE )
     }
     return (
@@ -30,10 +44,10 @@ const PostAdd = () => {
             <Paper elevation={6} >
                 <Typography component={"h2"} variant={"h5"}>Post ekleme sayfası </Typography>
                 <form onSubmit={handleSubmit} className={classes.form}>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={4}>
                         <Input name={"title"} label={"Post başlığı"}
                                type={"text"} handleChange={handleChange}/>
-                        <Input name={"description"} label={"İçeriği"} handleChange={handleChange}/>
+                        <Input name={"description"} type={"text"} label={"İçeriği"} handleChange={handleChange}/>
                         <Input type={"file"} name={"imageUrl"} label={"Resim"}   handleChange={handleChange}/>
                     </Grid>
                     <Button className={classes.submit} type={"submit"} fullWidth variant={"contained"} color={"primary"} onClick={switchMode}>Post ekle</Button>

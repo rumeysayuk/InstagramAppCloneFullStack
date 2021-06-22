@@ -10,8 +10,12 @@ export const signUp = (formData, router) => async (dispatch) => {
     const {data} = await services.signUp(formData)
     dispatch({type: actionTypes.AUTH, data})
 }
-export const isAuthenticated = () => localStorage.getItem("profile") !== null;
+export const isAuthenticated = () => async (dispatch)=>{
+    console.log("action")
 
-export const logOut = () => {
-    localStorage.removeItem("profile");
+    dispatch({type:actionTypes.GET_USER})
+}
+
+export const logOut = () => async (dispatch) => {
+    dispatch({type: actionTypes.LOG_OUT});
 }

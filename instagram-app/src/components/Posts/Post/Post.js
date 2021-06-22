@@ -2,13 +2,11 @@ import React, {useState} from "react";
 import {Card, CardActions, CardContent, CardMedia, IconButton, Typography, CardHeader, Avatar, TextField, Button} from "@material-ui/core";
 import useStyles from "./styles";
 import {BookmarkBorderOutlined, ChatBubbleOutlineRounded, FavoriteBorder, MoreHoriz, SendRounded} from "@material-ui/icons";
-import {useDispatch} from "react-redux";
 import logo from "../../../assets/images/stars.jpg"
+
 const Post = ({post}) => {
     const classes = useStyles();
-    const dispatch = useDispatch();
-   post.name ="Rümeysa Yük";
-    const [comment, setComment] = useState(null);
+    const [comment, setComment] = useState([]);
     const postComment = (e) => {
         e.preventDefault();
     }
@@ -21,20 +19,20 @@ const Post = ({post}) => {
                     <Avatar aria-label="recipe" className={classes.avatar}
                             src={"https://i2.milimaj.com/i/milliyet/75/0x0/6009348055427e21f0dcd3b8.jpg"}>
                     </Avatar>
-
                 }
                 action={
                     <IconButton aria-label="settings">
                         <MoreHoriz/>
                     </IconButton>
                 }
-                title="Rümeysa Yük"
+                title={post.username}
             />
 
             <CardMedia
                 className={classes.media}
-image={logo}
-                title="stars"
+               // image={post.imageUrl}
+                image={logo}
+               // title="stars"
             />
             <CardActions disableSpacing className={classes.cardFooter}>
                 <div>
@@ -53,23 +51,24 @@ image={logo}
                     </IconButton></div>
             </CardActions>
             <CardContent>
-                <div style={{display:"flex"}}>
-                    <Typography style={{marginRight:"15px"}} variant="body2" color="textPrimary" component="p">{post.name}  </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">{post.title}</Typography>
+                <div style={{display: "flex"}}>
+                    <Typography style={{marginRight: "15px",fontWeight:"bold"}} variant="body2" color="textPrimary"
+                                component="p">{post.username}  </Typography>
+                    <Typography variant="body2" color="textSecondary"  component="p">{post.title}</Typography>
                 </div>
 
                 <Typography variant="body2" color="textSecondary" component="p">{post.description}</Typography>
             </CardContent>
             <CardContent>
-                        <form>
+                <form>
 
-                            <TextField type="text" placeholder={"Yorum yap"}
-                                       onChange={handleChange}
-                                        fullWidth multiline/>
-                            <br/>
-                            <Button type={"submit"} onClick={postComment}
-                                    style={{float: "right", margin: "5px"}}>Yorum yap</Button>
-                        </form>
+                    <TextField type="text" placeholder={"Yorum yap"}
+                               onChange={handleChange}
+                               fullWidth multiline/>
+                    <br/>
+                    <Button type={"submit"} onClick={postComment}
+                            style={{float: "right", margin: "5px"}}>Yorum yap</Button>
+                </form>
 
             </CardContent>
         </Card>

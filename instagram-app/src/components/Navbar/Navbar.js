@@ -1,15 +1,19 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {AppBar, Avatar, Button, IconButton, InputBase, Menu, MenuItem, Toolbar, Typography} from "@material-ui/core";
 import {FavoriteBorder, HomeOutlined, ModeCommentOutlined, Search} from "@material-ui/icons";
 import styles from "./styles";
 import "../../style.css"
 import {Link} from "react-router-dom";
-import {logOut} from "../../actions/auths"
 import logo from "../../assets/images/instagram.png"
+import {useDispatch} from "react-redux";
+import {logOut, isAuthenticated, signUp, signIn} from "../../actions/auths"
+import {useHistory} from "react-router-dom";
 
 const Navbar = () => {
     const classes = styles();
-    //const [user, setUser] = useState(null);
+    const [user, setUser] = useState(null);
+    const dispatch = useDispatch();
+    const history = useHistory();
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -17,14 +21,38 @@ const Navbar = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    const [user, setUser] = useState({
-        name: "Rümeysa",
-        lastname:"Yük",
-        imageUrl: "https://i2.milimaj.com/i/milliyet/75/0x0/6009348055427e21f0dcd3b8.jpg"
-    });
+    // useEffect(()=>{
+    //     const isExistUser=isAuthenticated();
+    //     if (isAuthenticated()){
+    //         setUser(user);
+    //     }
+    //     else{
+    //         setUser(null)
+    //     }
+    //     return ()=>{isExistUser()}
+    // })
+    //
+    //
+    //
+
+
+    const isExistUser = (e) => {
+        e.preventDefault();
+           if(dispatch(isAuthenticated())){
+               setUser(true)
+               console.log("asdg")
+               console.log(isAuthenticated().token)
+               history.push("/");
+           }
+           else {
+               console.log("sdfbg")
+           }
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
-        logOut(user);
+        dispatch(logOut())
+        setUser(null)
+        history.push("/auth");
     }
 
     return (
@@ -77,17 +105,17 @@ const Navbar = () => {
 
                                     <MenuItem>
                                         <Typography className={classes.userName}
-                                                    variant={"h6"}>{user?.name + " " + user?.lastname}</Typography>
+                                                    variant={"h6"}>{user?.username}</Typography>
                                     </MenuItem>
                                     <MenuItem component={Link} onClick={handleClose} to={"/postadd"}>Post
                                         ekle</MenuItem>
-                                    <MenuItem onClick={handleClose} onSubmit={handleSubmit}>Çıkış yap</MenuItem>
+                                    <MenuItem onClick={handleSubmit} onSubmit={handleClose} >Çıkış yap</MenuItem>
                                 </Menu>
                             </div>
                         </IconButton>
                     </>
                 ) : (
-                    <Button component={Link} to={"/auth"} variant={"contained"} color={"primary"}>Giriş Yap</Button>
+                    <Button component={Link} to={"/auth"} variant={"contained"} color={"primary"} onClick={isExistUser}>Giriş Yap</Button>
                 )
                 }
             </Toolbar>

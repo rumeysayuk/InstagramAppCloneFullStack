@@ -2,16 +2,14 @@ const express = require("express")
 const dotenv = require("dotenv")
 const databaseConnectionHelper = require("./helpers/database/databaseConnectionHelper")
 const routes = require("./routes")
-const cors = require("cors")
-const bodyParser = require("body-parser")
 const session = require("express-session")
 //const mongoDbStore = require("connect-mongodb-session")(session);
 const cookieParser = require("cookie-parser");
 const morgan =require("morgan")
 const mongoose = require("mongoose");
-
 const app = express();
-
+const bodyParser = require('body-parser');
+const cors = require('cors');
 dotenv.config({
     path: "./config/environment/config.env",
 })
