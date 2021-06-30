@@ -11,7 +11,7 @@ const databaseConnectionHelper = (app) => {
             .then(() => app.listen(PORT, () =>
                 console.log(`Server Running on Port : ${PORT}`)))
     } catch (e) {
-        console.log(e);
+        console.log(e.stack);
     }
 }
 

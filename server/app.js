@@ -1,31 +1,33 @@
 const express = require("express")
 const dotenv = require("dotenv")
-const databaseConnectionHelper = require("./helpers/database/databaseConnectionHelper")
 const routes = require("./routes")
-const session = require("express-session")
+// const session = require("express-session")
 //const mongoDbStore = require("connect-mongodb-session")(session);
-const cookieParser = require("cookie-parser");
-const morgan =require("morgan")
-const mongoose = require("mongoose");
+// const cookieParser = require("cookie-parser");
+// const morgan =require("morgan")
+// const mongoose = require("mongoose");
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 dotenv.config({
     path: "./config/environment/config.env",
 })
+const databaseConnectionHelper = require("./helpers/database/databaseConnectionHelper")
+const path = require("path");
+
 // let store = new mongoDbStore({
 //     uri: databaseConnectionHelper,
 //     collection: "sessions",
 // });
-mongoose.Promise = global.Promise;
-app.use(morgan("dev"));
-app.use('/uploads', express.static('uploads'))
+// mongoose.Promise = global.Promise;
+// app.use(morgan("dev"));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(bodyParser.json({limit: "30mb", extended: true}))
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}))
 
 app.use(cors())
-app.use(cookieParser());
+// app.use(cookieParser());
 // app.use(
 //     session({
 //         secret: "keyboard cat",
@@ -51,8 +53,3 @@ app.use(cookieParser());
 app.use("/api", routes);
 
 databaseConnectionHelper(app);
-
-
-
-
-
