@@ -10,11 +10,8 @@ const authReducer = (state = {authData: null, token: null}, action) => {
             localStorage.clear();
             return {...state, authData: null}
         case actionTypes.GET_USER:
-            console.log("reducer")
             localStorage.getItem("profile");
             localStorage.getItem("token")
-
-            console.log(localStorage.getItem("token"))
             return {...state,authData: action.data}
         default:
             return state;

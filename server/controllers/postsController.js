@@ -12,17 +12,18 @@ const getAllPosts = async (req, res) => {
 }
 const addPost = async (req, res,) => {
     const post = await Post.create({
-        title: req.body.title,
         description: req.body.description,
         imageUrl: "uploads/"+req.file.path,
         comment: req.body.comment,
         username:req.body.username,
+
     });
     console.log(post)
     post.save().then(result => {
         res.status(201).json({
             message: "created post succesfully",
         });
+        console.log(result)
     }).catch(error => {
           res.status(500).json({error:error})
     })

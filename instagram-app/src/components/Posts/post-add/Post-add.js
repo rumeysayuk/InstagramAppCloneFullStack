@@ -1,60 +1,48 @@
 import React, {useState} from "react";
 import {Button, Container, Grid, Paper, Typography} from "@material-ui/core";
-import Input from "../../Toolbox/Input";
-import {useHistory} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import * as routes from "../../../constants/routes";
-import {addPost} from "../../../actions/posts";
 import styles from "./styles";
+import {useDispatch} from "react-redux";
+import {addPost} from "../../../actions/posts"
+import {useHistory} from "react-router-dom";
 
 const PostAdd = () => {
     const classes = styles();
-    const [isFill,setFill]=useState(null)
-    const [form, setForm] = useState()
-    const history = useHistory();
+    const [image, setImage] = useState("");
+    const [description, setDescription] = useState("");
     const dispatch = useDispatch();
-    const state={
-        title:'',
-        description:'',
-        image:null,
-    }
-   const handleImageChange = (e) => {
-        this.setState({ image: e.target.files[0] });
-    }
+    const history = useHistory();
 
-   const handleChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
+    const handleChange = (e) => {
+        let image = e.target.files[0]
+        if (image) {
+            setImage(image);
+        }
     }
-
-    const switchMode = () => {
-        setFill((prevIsSignUp) => !prevIsSignUp)
-    }
-    const handleSubmit = async (e) => {
+    const handleUpload = (e) => {
         e.preventDefault();
-       const data= new FormData();
-       data.append('image',this.state.imageUrl);
-       data.append('title',this.state.title);
-       data.append('description',this.state.description);
+        console.log(description)
+        console.log(image)
+        dispatch(addPost(description,image))
 
-
-        history.push(routes.HOMEPAGE )
+        history.push("/");
     }
     return (
-        <Container component={"main"} maxWidth={"xs"}>
-            <Paper elevation={6} >
-                <Typography component={"h2"} variant={"h5"}>Post ekleme sayfası </Typography>
-                <form onSubmit={handleSubmit} className={classes.form}>
-                    <Grid container spacing={4}>
-                        <Input name={"title"} label={"Post başlığı"}
-                               type={"text"} handleChange={handleChange}/>
-                        <Input name={"description"} type={"text"} label={"İçeriği"} handleChange={handleChange}/>
-                        <Input type={"file"} name={"imageUrl"} label={"Resim"}   handleChange={handleChange}/>
+        <Container component={"main"} maxWidth={"md"}>
+            <Paper elevation={6}>
+                <Typography component={"h2"} variant={"h5"} className={classes.title}>Post ekleme sayfası </Typography>
+                    <Grid container spacing={6}>
+                        <input value={description} placeholder="İçeriği yazınız" onChange={(e) => {
+                          setDescription(e.target.value);}}
+                               type={"text"}/>
+                        <input type="file" onChange={handleChange}/>
+                        <Button className={classes.submit} type={"submit"} fullWidth variant={"contained"}
+                                color={"primary"} onClick={handleUpload}
+                        >Post ekle</Button>
                     </Grid>
-                    <Button className={classes.submit} type={"submit"} fullWidth variant={"contained"} color={"primary"} onClick={switchMode}>Post ekle</Button>
-                </form>
             </Paper>
         </Container>
     )
 }
+
 
 export default PostAdd;

@@ -5,12 +5,13 @@ export default makeStyles((theme) => ({
         width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(6),
     },
+    title:{
+        padding:'17px',
+        textAlign:"center"
+    },
     submit: {
         margin: theme.spacing(8, 0, 2),
+        marginRight:'38px',
+        marginLeft:'38px'
     },
-    head:{
-        marginTop:"10px",
-        textAlign:"center"
-    }
-
 }));

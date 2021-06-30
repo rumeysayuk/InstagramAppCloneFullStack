@@ -6,49 +6,36 @@ import "../../style.css"
 import {Link} from "react-router-dom";
 import logo from "../../assets/images/instagram.png"
 import {useDispatch} from "react-redux";
-import {logOut, isAuthenticated, signUp, signIn} from "../../actions/auths"
+import {logOut} from "../../actions/auths"
 import {useHistory} from "react-router-dom";
 
 const Navbar = () => {
     const classes = styles();
-    const [user, setUser] = useState(null);
-    const dispatch = useDispatch();
-    const history = useHistory();
-    const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
     };
-    // useEffect(()=>{
-    //     const isExistUser=isAuthenticated();
-    //     if (isAuthenticated()){
-    //         setUser(user);
-    //     }
-    //     else{
-    //         setUser(null)
-    //     }
-    //     return ()=>{isExistUser()}
-    // })
-    //
-    //
-    //
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [user, setUser] = useState(null);
 
+    useEffect(()=>{
+          let user= JSON.parse(localStorage.getItem("profile"));
+        console.log(user.firstName);
+          if(user){
+              setUser(user)
+              history.push("/")
 
-    const isExistUser = (e) => {
-        e.preventDefault();
-           if(dispatch(isAuthenticated())){
-               setUser(true)
-               console.log("asdg")
-               console.log(isAuthenticated().token)
-               history.push("/");
-           }
-           else {
-               console.log("sdfbg")
-           }
-    }
-    const handleSubmit = (e) => {
+          }else{
+              setUser(null)
+              history.push("/auth");
+          }
+    },[])
+
+     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(logOut())
         setUser(null)
@@ -109,13 +96,14 @@ const Navbar = () => {
                                     </MenuItem>
                                     <MenuItem component={Link} onClick={handleClose} to={"/postadd"}>Post
                                         ekle</MenuItem>
-                                    <MenuItem onClick={handleSubmit} onSubmit={handleClose} >Çıkış yap</MenuItem>
+                                    <MenuItem onClick={handleSubmit} onSubmit={handleClose}>Çıkış yap</MenuItem>
                                 </Menu>
                             </div>
                         </IconButton>
                     </>
                 ) : (
-                    <Button component={Link} to={"/auth"} variant={"contained"} color={"primary"} onClick={isExistUser}>Giriş Yap</Button>
+                    <Button component={Link} to={"/auth"} variant={"contained"} color={"primary"} >Giriş
+                        yap</Button>
                 )
                 }
             </Toolbar>

@@ -9,6 +9,7 @@ const Post = ({post}) => {
     const [comment, setComment] = useState([]);
     const postComment = (e) => {
         e.preventDefault();
+        setComment()
     }
     const [form, setForm] = useState(null)
     const handleChange = (e) => setForm({...form, [e.target.name]: e.target.value})
@@ -54,7 +55,6 @@ const Post = ({post}) => {
                 <div style={{display: "flex"}}>
                     <Typography style={{marginRight: "15px",fontWeight:"bold"}} variant="body2" color="textPrimary"
                                 component="p">{post.username}  </Typography>
-                    <Typography variant="body2" color="textSecondary"  component="p">{post.title}</Typography>
                 </div>
 
                 <Typography variant="body2" color="textSecondary" component="p">{post.description}</Typography>

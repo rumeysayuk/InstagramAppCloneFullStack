@@ -11,8 +11,6 @@ export const signUp = (formData, router) => async (dispatch) => {
     dispatch({type: actionTypes.AUTH, data})
 }
 export const isAuthenticated = () => async (dispatch)=>{
-    console.log("action")
-
     dispatch({type:actionTypes.GET_USER})
 }
 
