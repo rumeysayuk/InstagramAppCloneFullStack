@@ -1,4 +1,4 @@
-import * as actionTypes from "../constants/actionTypes";
+import * as actionTypes from "../actionTypes/actionTypes";
 
 export default (posts = {description: "", image: ""}, action) => {
     switch (action.type) {

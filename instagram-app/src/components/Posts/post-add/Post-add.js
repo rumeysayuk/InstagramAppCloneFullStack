@@ -1,29 +1,31 @@
 import React, {useState} from "react";
 import {Button, Container, Grid, Paper, Typography} from "@material-ui/core";
 import styles from "./styles";
-import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 import * as services from "../../../services";
+import {getUserFromLocalStorage} from "../../../services/userServices";
 
 const PostAdd = () => {
    const classes = styles();
    const [image, setImage] = useState({});
    const [description, setDescription] = useState("");
-   const dispatch = useDispatch();
    const history = useHistory();
    let formData = new FormData();
 
+   const {user} = getUserFromLocalStorage();
+
    const handleChange = (e) => {
-      let image = e.target.files[0]
-      if (image) {
-         setImage(image);
+      let uploadedImage = e.target.files[0]
+      if (uploadedImage) {
+         setImage(uploadedImage);
       }
    }
+
    const handleUpload = (e) => {
       e.preventDefault();
       formData.append("imageUrl", image);
       formData.append("description", description);
-      formData.append("username", "emircan")
+      formData.append("username", user.username)
       services.addPost(formData).then(() => {
          history.push("/");
       })

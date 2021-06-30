@@ -4,7 +4,7 @@ import styles from "./styles";
 import Input from "../Toolbox/Input";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
-import {signIn, signUp} from "../../actions/auths"
+import {signIn, signUp} from "../../store/actions/auths"
 
 
 const initialState = {firstName: "", lastName: "", password: "", email: "", confirmPassword: "",username: ""}

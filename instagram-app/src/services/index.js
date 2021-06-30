@@ -1,4 +1,4 @@
-import apiAxios from "../axios/apiAxios";
+import apiAxios from "../lib/axios/apiAxios";
 
 export const getAllPosts = () => apiAxios.get("posts");
 

@@ -6,7 +6,7 @@ import "../../style.css"
 import {Link, useHistory} from "react-router-dom";
 import logo from "../../assets/images/instagram.png"
 import {useDispatch} from "react-redux";
-import {logOut} from "../../actions/auths"
+import {logOut} from "../../store/actions/auths"
 import {getUserFromLocalStorage} from "../../services/userServices";
 
 const Navbar = () => {

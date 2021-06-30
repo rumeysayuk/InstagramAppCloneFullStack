@@ -1,7 +1,7 @@
 import {getUser} from "./localStorageService";
 
 export const getUserFromLocalStorage = () => {
-   let activeUser = getUser;
+   let activeUser = getUser();
 
    const setActiveUser = () => {
       activeUser = getUser();

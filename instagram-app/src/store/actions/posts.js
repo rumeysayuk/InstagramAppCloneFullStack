@@ -1,5 +1,5 @@
-import * as services from "../services";
-import * as actionTypes from "../constants/actionTypes"
+import * as services from "../../services";
+import * as actionTypes from "../actionTypes/actionTypes"
 
 export const getAllPosts = () => async (dispatch) => {
     const response = await services.getAllPosts();

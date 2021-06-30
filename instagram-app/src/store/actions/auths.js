@@ -1,5 +1,5 @@
-import * as actionTypes from "../constants/actionTypes";
-import * as services from "../services/index.js";
+import * as actionTypes from "../actionTypes/actionTypes";
+import * as services from "../../services";
 
 
 export const signIn = (formData, router) => async (dispatch) => {

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import Posts from "./components/Posts/Posts";
-import {getAllPosts} from "./actions/posts";
+import {getAllPosts} from "./store/actions/posts";
 import {useDispatch} from "react-redux";
 import Navbar from "./components/Navbar/Navbar";
 import {BrowserRouter, Route, Switch} from "react-router-dom"
