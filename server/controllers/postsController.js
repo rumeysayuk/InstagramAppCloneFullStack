@@ -1,5 +1,5 @@
 const Post = require("../models/Post")
-// const CustomError = require("../helpers/error/CustomError");
+ const CustomError = require("../helpers/error/CustomError");
 const User = require('../models/User');
 const mongoose = require("mongoose")
 
