@@ -25,6 +25,6 @@ const storage = multer.diskStorage({
    },
 });
 
-const profileImageUpload = multer({ storage: storage, fileFilter: fileFilter });
+const profileImageUpload = multer({ storage, fileFilter });
 
 module.exports = profileImageUpload;

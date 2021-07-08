@@ -14,6 +14,9 @@ dotenv.config({
 })
 const databaseConnectionHelper = require("./helpers/database/databaseConnectionHelper")
 const path = require("path");
+const swaggerUI = require("swagger-ui-express");
+const swaggerDocument = require('./lib/swagger.json');
+const customErrorHandler = require("./middlewares/errors/customErrorHandler");
 
 // let store = new mongoDbStore({
 //     uri: databaseConnectionHelper,
@@ -51,5 +54,6 @@ app.use(cors())
 // });
 // app.use(csurf());
 app.use("/api", routes);
-
+app.use("/swagger", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+app.use(customErrorHandler);
 databaseConnectionHelper(app);

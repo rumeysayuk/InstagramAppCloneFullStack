@@ -1,5 +1,5 @@
 const Post = require("../models/Post")
- const CustomError = require("../helpers/error/CustomError");
+const CustomError = require("../helpers/error/CustomError");
 const User = require('../models/User');
 const mongoose = require("mongoose")
 
@@ -9,7 +9,6 @@ const getAllPosts = async (req, res) => {
         success: true,
         data: posts
     })
-
 }
 
 const addPost = async (req, res) => {
@@ -27,7 +26,7 @@ const addPost = async (req, res) => {
 
 const addComment = async (req, res) => {
     const { text, postedBy, postId } = req.body;
-    if(!mongoose.Types.ObjectId.isValid(postedBy)) return res.status(404).send(`Bu Id'ye uygun kullanıcı bulunamadı.. ${postedBy}`);
+    // if(!mongoose.Types.ObjectId.isValid(postedBy)) return res.status(404).send(`Bu Id'ye uygun kullanıcı bulunamadı.. ${postedBy}`);
 
     const user = await User.findById(postedBy);
     if (!user) return res.status(404).send(`Bu Id'ye uygun kullanıcı bulunamadı.. ${postedBy}`);

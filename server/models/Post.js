@@ -1,8 +1,6 @@
 const mongoose = require('mongoose')
 const {MIN_LENGTH_ERROR, REQUIRED_ERROR} = require("../constants/messages/globalMessages");
-const Schema = mongoose.Schema;
-const PostSchema = new Schema({
-
+const PostSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
@@ -26,12 +24,7 @@ const PostSchema = new Schema({
     postedBy: {
         type: mongoose.Types.ObjectId,
         ref: "Users",
-    },
-    username:{
-        type:String,
-        ref:"Users",
     }
-
 })
 
 module.exports = mongoose.model("Posts", PostSchema);

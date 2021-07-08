@@ -21,7 +21,7 @@ const UserSchema = new Schema({
 
     email: {
         type: String,
-        required: [true, REQUIRED_ERROR(this)],
+        required: [true, "Email Alanı Zorunludur"],
         unique: [true, EMAIL_UNIQUE_ERROR],
         match: [/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/, PLEASE_PROVIDE_EMAIL],
     },
