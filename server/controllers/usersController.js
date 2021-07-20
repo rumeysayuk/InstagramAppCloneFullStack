@@ -5,9 +5,10 @@ const CustomError = require("../helpers/error/CustomError");
 const asyncErrorWrapper = require("express-async-handler");
 const secret = "test";
 
-const signIn = async (req, res) => {
+const signIn = async (req, res, next) => {
    const {email, password} = req.body;
    const oldUser = await User.findOne({email}).select("+password");
+   // if (!oldUser) return next(new CustomError("Böyle Bir Kullanıcı Bulunamadı", 400));
    if (!oldUser) return res.status(404).json({message: "Böyle Bir Kullanıcı Bulunamadı"})
 
    const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);

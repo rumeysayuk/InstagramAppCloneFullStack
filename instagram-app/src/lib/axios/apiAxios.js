@@ -18,7 +18,7 @@ apiAxios.interceptors.request.use((req) => {
     const profile = JSON.parse(localStorage.getItem("profile"));
 
     if (profile) {
-        req.headers.user = profile;
+        req.user = profile;
     }
 
     return req;

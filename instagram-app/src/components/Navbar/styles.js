@@ -2,6 +2,9 @@ import {makeStyles} from '@material-ui/core/styles';
 import {deepPurple} from '@material-ui/core/colors';
 
 export default makeStyles((theme) => ({
+   paper: {
+      marginRight: theme.spacing(2),
+   },
    appBar: {
       borderRadius: 15,
       margin: '30px 0',
@@ -24,7 +27,7 @@ export default makeStyles((theme) => ({
       },
    },
    rightSearch: {
-     display: "none",
+      display: "none",
       [theme.breakpoints.down('sm')]: {
          display: "block",
       },
@@ -37,6 +40,7 @@ export default makeStyles((theme) => ({
       display: 'flex',
       alignItems: "center",
       justifyContent: "center",
+      overflow: "hidden"
    },
    logout: {
       marginLeft: '20px',

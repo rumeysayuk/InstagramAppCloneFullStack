@@ -1,5 +1,4 @@
 export const HOMEPAGE="/"
+export const ADD_POST="/postadd"
 export const AUTH ="/auth"
-export const SIGNIN="users/signin"
-export const SIGNUP="users/signup"
-
+export const PROFILE ="/profile"

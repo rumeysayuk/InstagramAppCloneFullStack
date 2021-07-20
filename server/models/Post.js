@@ -19,7 +19,15 @@ const PostSchema = new mongoose.Schema({
         postedBy: {
             type: mongoose.Types.ObjectId,
             ref: "Users"
-        }
+        },
+        likes: [
+            {
+                likedBy: {
+                    type: mongoose.Types.ObjectId,
+                    ref: "Users",
+                }
+            }
+        ]
     }] ,
     postedBy: {
         type: mongoose.Types.ObjectId,

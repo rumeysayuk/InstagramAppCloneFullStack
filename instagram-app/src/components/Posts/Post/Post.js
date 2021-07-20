@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
    Avatar,
    Button,
@@ -14,26 +14,45 @@ import {
 import useStyles from "./styles";
 import {
    BookmarkBorderOutlined,
-   ChatBubbleOutlineRounded,
-   FavoriteBorder,
+   ChatBubbleOutlineRounded, Favorite,
+   FavoriteBorder, FavoriteOutlined, FavoriteSharp,
    MoreHoriz,
    SendRounded
 } from "@material-ui/icons";
 import * as services from "../../../services";
+import {useSelector} from "react-redux";
+import {capitalizeFirstLetter} from "../../../helpers/capitalizeFirstLetter";
+import CommentRow from "./CommentRow";
 
 const Post = ({post}) => {
    const classes = useStyles();
    const [comment, setComment] = useState("");
+   const [comments, setComments] = useState([]);
+   const {authData} = useSelector(state => state.auth)
 
    const postComment = (e) => {
       e.preventDefault();
-      const formValues = {text: comment, postedBy: "60dca06b8b6d5343ec652583", postId: post._id}
-
+      const formValues = {text: comment, postedBy: authData._id, postId: post._id}
       services.addComment(formValues).then(response => {
-         console.log(response);      })
+         setComments(response.data.data);
+         setComment("");
+      })
    }
-   const [form, setForm] = useState(null)
-   const handleChange = (e) => setForm({...form, [e.target.name]: e.target.value})
+
+   const likeUndoLikeComment = (commentId,e) => {
+      e.preventDefault()
+      const data = { commentId: commentId, likedBy: authData._id, postId: post._id }
+
+      services.likeUndoLikeComment(data).then(response=>{
+         setComments(response.data.data)
+      })
+   }
+
+   useEffect(() => {
+      setComments(post.comments);
+   }, [])
+
+
    return (
       <Card className={classes.root}>
          <CardHeader
@@ -77,13 +96,19 @@ const Post = ({post}) => {
                <Typography style={{marginRight: "15px", fontWeight: "bold"}} variant="body2" color="textPrimary"
                            component="p">{post.username}  </Typography>
             </div>
-
             <Typography variant="body2" color="textSecondary" component="p">{post.description}</Typography>
          </CardContent>
+         <div className="post__comments" style={{padding: 20}}>
+            {comments.map((comment, index) => (
+               index < 2 && (
+                  <CommentRow key={comment._id} likeUndoLikeComment={likeUndoLikeComment} comment={comment} />
+               )
+            ))}
+         </div>
          <CardContent>
-            <TextField type="text" placeholder={"Yorum yap"}
-                       onChange={({target}) => setComment(target.value)}
-                       fullWidth multiline/>
+            <TextField type="text" placeholder={"Yorum yap"} fullWidth multiline value={comment}  maxRows={4}
+                       onChange={(e) => setComment(e.target.value)}
+            />
             <br/>
             <Button type={"submit"} onClick={postComment}
                     style={{float: "right", margin: "5px"}}>Yorum yap</Button>
@@ -91,5 +116,4 @@ const Post = ({post}) => {
       </Card>
    )
 }
-
 export default Post;

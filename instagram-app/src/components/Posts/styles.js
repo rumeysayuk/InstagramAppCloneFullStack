@@ -6,7 +6,9 @@ export default makeStyles((theme) => ({
         flexGrow: 1,
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing(3),
-
+        [theme.breakpoints.down('xs')]: {
+            padding: 0,
+        },
     },
     root: {
         flexGrow: 1,
@@ -18,15 +20,12 @@ export default makeStyles((theme) => ({
         alignItems:"center"
     },
     postList:{
-        width:"60%",
+        width:"50%",
         [theme.breakpoints.down('sm')]: {
-            width: '100%',
-
+            width: '80%',
         },
         [theme.breakpoints.down('xs')]: {
             width: '100%',
-
         },
-
     }
 }));

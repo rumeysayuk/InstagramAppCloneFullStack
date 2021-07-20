@@ -5,9 +5,9 @@ import styles from "./styles";
 import "../../style.css"
 import {Link, useHistory} from "react-router-dom";
 import logo from "../../assets/images/instagram.png"
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {logOut} from "../../store/actions/auths"
-import {getUserFromLocalStorage} from "../../services/userServices";
+import * as ROUTES from "../../constants/routes";
 
 const Navbar = () => {
    const classes = styles();
@@ -20,25 +20,18 @@ const Navbar = () => {
    const dispatch = useDispatch();
    const history = useHistory();
    const [anchorEl, setAnchorEl] = useState(null);
-   const {user} = getUserFromLocalStorage()
+   const {authData} = useSelector(state => state.auth);
 
-   useEffect(() => {
-      if (user) {
-         history.push("/")
-      } else {
-         history.push("/auth");
-      }
-   }, [])
-
-   const handleSubmit = (e) => {
+   const handleLogout = (e) => {
       e.preventDefault();
       dispatch(logOut())
-      history.push("/auth");
+      handleClose();
+      history.push(ROUTES.AUTH);
    }
 
    return (
       <AppBar className={classes.appBar} position={"static"} color={"inherit"}>
-         <Link className={classes.brandContainer} to={"/"}>
+         <Link className={classes.brandContainer} to={ROUTES.HOMEPAGE}>
             <img height={"60"} className={classes.image}
                  src={logo}
                  alt=""/>
@@ -56,7 +49,7 @@ const Navbar = () => {
             />
          </div>
          <Toolbar className={classes.toolbar}>
-            {user ? (
+            {authData ? (
                <>
                   <IconButton color="inherit">
                      <HomeOutlined/>
@@ -72,34 +65,29 @@ const Navbar = () => {
                   </IconButton>
                   <IconButton>
                      <div>
-                        <Avatar aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}
+                        <Avatar onClickCapture={() => history.push(ROUTES.PROFILE)} aria-controls="simple-menu" aria-haspopup="true"
+                                onClick={(event) => handleClick(event)}
                                 src={"https://i2.milimaj.com/i/milliyet/75/0x0/6009348055427e21f0dcd3b8.jpg"}>
                         </Avatar>
-                        <Menu
-                           id="simple-menu"
-                           anchorEl={anchorEl}
-                           keepMounted
-                           open={Boolean(anchorEl)}
-                           onClose={handleClose}
-                           className={classes.logout}
-                        >
-
-                           <MenuItem>
-                              <Typography className={classes.userName}
-                                          variant={"h6"}>{user?.username}</Typography>
-                           </MenuItem>
-                           <MenuItem component={Link} onClick={handleClose} to={"/postadd"}>Post
-                              ekle</MenuItem>
-                           <MenuItem onClick={handleSubmit} onSubmit={handleClose}>Çıkış yap</MenuItem>
-                        </Menu>
+                        {/*<Menu*/}
+                        {/*   anchorEl={anchorEl}*/}
+                        {/*   keepMounted*/}
+                        {/*   open={Boolean(anchorEl)}*/}
+                        {/*   onClose={handleClose}*/}
+                        {/*   className={classes.logout}*/}
+                        {/*>*/}
+                        {/*   <MenuItem>*/}
+                        {/*      <Typography className={classes.userName} variant={"h6"}>{authData?.username}</Typography>*/}
+                        {/*   </MenuItem>*/}
+                        {/*   <MenuItem component={Link} onClick={handleClose} to={ROUTES.ADD_POST}>Post ekle</MenuItem>*/}
+                        {/*   <MenuItem onClick={handleLogout}>Çıkış yap</MenuItem>*/}
+                        {/*</Menu>*/}
                      </div>
                   </IconButton>
                </>
             ) : (
-               <Button component={Link} to={"/auth"} variant={"contained"} color={"primary"}>Giriş
-                  yap</Button>
-            )
-            }
+               <Button component={Link} to={ROUTES.AUTH} variant={"contained"} color={"primary"}>Giriş yap</Button>
+            )}
          </Toolbar>
       </AppBar>
    )

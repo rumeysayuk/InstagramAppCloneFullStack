@@ -8,11 +8,10 @@ import {useSelector} from "react-redux";
 const Posts = () => {
     const classes = useStyles();
     const posts = useSelector((state) => state.posts);
-
     return !posts.length ? <CircularProgress/> : (
         <main className={classes.content}>
             <div className={classes.toolbar}/>
-            <Grid container justify={"center"} spacing={3}
+            <Grid container  spacing={3}
                   className={classes.container} item xs={12} sm={12} md={12} lg={12}>
                 {
                     posts.map((post) => (

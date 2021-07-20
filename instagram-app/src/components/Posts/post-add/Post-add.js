@@ -4,6 +4,7 @@ import styles from "./styles";
 import {useHistory} from "react-router-dom";
 import * as services from "../../../services";
 import {getUserFromLocalStorage} from "../../../services/userServices";
+import * as ROUTES from "../../../constants/routes";
 
 const PostAdd = () => {
    const classes = styles();
@@ -27,7 +28,7 @@ const PostAdd = () => {
       formData.append("description", description);
       formData.append("username", user.username)
       services.addPost(formData).then(() => {
-         history.push("/");
+         history.push(ROUTES.HOMEPAGE);
       })
    }
    return (
@@ -37,8 +38,7 @@ const PostAdd = () => {
             <Grid container spacing={6}>
                <input value={description} placeholder="İçeriği yazınız" onChange={(e) => {
                   setDescription(e.target.value);
-               }}
-                      type={"text"}/>
+               }} type={"text"}/>
                <input type="file" onChange={handleChange}/>
                <Button className={classes.submit} type={"submit"} fullWidth variant={"contained"}
                        color={"primary"} onClick={handleUpload}

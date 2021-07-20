@@ -1,5 +1,7 @@
 const express = require("express")
-const dotenv = require("dotenv")
+require("dotenv").config({
+    path: "./config/environment/config.env",
+})
 const routes = require("./routes")
 // const session = require("express-session")
 //const mongoDbStore = require("connect-mongodb-session")(session);
@@ -9,9 +11,6 @@ const routes = require("./routes")
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-dotenv.config({
-    path: "./config/environment/config.env",
-})
 const databaseConnectionHelper = require("./helpers/database/databaseConnectionHelper")
 const path = require("path");
 const swaggerUI = require("swagger-ui-express");
