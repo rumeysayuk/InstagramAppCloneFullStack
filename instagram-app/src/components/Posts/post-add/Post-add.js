@@ -33,11 +33,10 @@ const PostAdd = () => {
    return (
       <Container component={"main"} maxWidth={"md"}>
          <Paper elevation={6}>
-            <Typography component={"h2"} variant={"h5"} className={classes.title}>Post ekleme sayfası </Typography>
+            <Typography component={"h2"} variant={"h5"} className={classes.title}>Post ekleme sayfası</Typography>
             <Grid container spacing={6}>
-               <input value={description} placeholder="İçeriği yazınız" onChange={(e) => {
-                  setDescription(e.target.value);
-               }} type={"text"}/>
+               <input value={description} placeholder="İçeriği yazınız" type={"text"}
+                      onChange={(e) => {setDescription(e.target.value)}} />
                <input type="file" onChange={handleChange}/>
                <Button className={classes.submit} type={"submit"} fullWidth variant={"contained"}
                        color={"primary"} onClick={handleUpload}

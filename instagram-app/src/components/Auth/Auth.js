@@ -6,6 +6,7 @@ import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {signIn, signUp} from "../../store/actions/auths"
 import * as ROUTES from "../../constants/routes";
+import * as services from "../../services";
 
 const initialState = {firstName: "", lastName: "", password: "", email: "", confirmPassword: "", username: ""}
 
@@ -28,11 +29,18 @@ const Auth = () => {
    const handleSubmit = (e) => {
       e.preventDefault();
       if (isSignUp) {
-         dispatch(signUp(form, history))
+         services.signIn(form)
+            .then((res) => {
+               dispatch(signUp(res.data))
+               history.push(ROUTES.HOMEPAGE);
+            })
       } else {
-         dispatch(signIn(form, history))
+         services.signIn(form)
+            .then((res) => {
+               dispatch(signIn(res.data))
+               history.push(ROUTES.HOMEPAGE);
+            })
       }
-      history.push(ROUTES.HOMEPAGE);
    }
 
    return (

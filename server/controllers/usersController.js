@@ -5,19 +5,26 @@ const CustomError = require("../helpers/error/CustomError");
 const asyncErrorWrapper = require("express-async-handler");
 const secret = "test";
 
-const signIn = async (req, res, next) => {
+const signIn = asyncErrorWrapper(async (req, res, next) => {
    const {email, password} = req.body;
    const oldUser = await User.findOne({email}).select("+password");
    // if (!oldUser) return next(new CustomError("Böyle Bir Kullanıcı Bulunamadı", 400));
-   if (!oldUser) return res.status(404).json({message: "Böyle Bir Kullanıcı Bulunamadı"})
+   if (!oldUser){
+      return next(new CustomError("Please Check Your Inputs!", 400));
+   }
 
-   const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);
-   if (!isPasswordCorrect) return res.status(400).json({message: "Hatalı Şifre"});
+   // return next(new CustomError("Böyle Bir Kullanıcı Bulunamadı", 400))
+   // return res.status(404).json({message: "Böyle Bir Kullanıcı Bulunamadı"})
+   const isPasswordCorrect = await bcrypt.compareSync(password, oldUser.password);
+   if (!isPasswordCorrect) {
+      return next(new CustomError("Hatalı Şifre", 400));
+   }
 
+   // return res.status(400).json({message: "Hatalı Şifre"});
    const token = jwt.sign({email: oldUser.email, id: oldUser._id}, secret, {expiresIn: "1h"})
 
    return res.status(200).json({result: oldUser, token})
-}
+})
 
 const signUp = asyncErrorWrapper(async (req, res) => {
    const {username, firstName, lastName, email, password, confirmPassword} = req.body;

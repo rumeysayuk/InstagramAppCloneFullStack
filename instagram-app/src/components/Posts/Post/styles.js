@@ -2,6 +2,8 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
     root: {
+        boxShadow: theme.palette.boxShadows.medium,
+        borderRadius: theme.customs.borderRadius.medium,
         maxWidth: '100%',
         width: '100%'
     },

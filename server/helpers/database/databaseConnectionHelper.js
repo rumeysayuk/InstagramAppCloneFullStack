@@ -1,18 +1,19 @@
 const mongoose = require("mongoose");
 
-const databaseConnectionHelper = (app) => {
-    const PORT = process.env.PORT;
-    try {
-        mongoose
-            .connect(process.env.MONGO_URL, {
-                useNewUrlParser: true,
-                useUnifiedTopology: true
-            })
-            .then(() => app.listen(PORT, () =>
-                console.log(`Server Running on Port : ${PORT}`)))
-    } catch (e) {
-        console.log(e.message);
-    }
+const databaseConnectionHelper = () => {
+   mongoose
+      .connect(process.env.MONGO_URL, {
+         useNewUrlParser: true,
+         useFindAndModify: false,
+         useCreateIndex: true,
+         useUnifiedTopology: true,
+      })
+      .then(() => {
+         console.log("mongodb connection successful");
+      })
+      .catch((err) => {
+         console.error(err);
+      });
 }
 
 module.exports = databaseConnectionHelper;

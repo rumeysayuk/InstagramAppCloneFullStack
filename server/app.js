@@ -1,6 +1,6 @@
 const express = require("express")
 require("dotenv").config({
-    path: "./config/environment/config.env",
+   path: "./config/environment/config.env",
 })
 const routes = require("./routes")
 // const session = require("express-session")
@@ -23,12 +23,13 @@ const customErrorHandler = require("./middlewares/errors/customErrorHandler");
 // });
 // mongoose.Promise = global.Promise;
 // app.use(morgan("dev"));
-app.use(express.static(path.join(__dirname, "public")));
+
+databaseConnectionHelper();
+app.use(cors())
 
 app.use(bodyParser.json({limit: "30mb", extended: true}))
-app.use(bodyParser.urlencoded({limit: "30mb", extended: true}))
+// app.use(bodyParser.urlencoded({limit: "30mb", extended: true}))
 
-app.use(cors())
 // app.use(cookieParser());
 // app.use(
 //     session({
@@ -53,6 +54,13 @@ app.use(cors())
 // });
 // app.use(csurf());
 app.use("/api", routes);
-app.use("/swagger", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use(customErrorHandler);
-databaseConnectionHelper(app);
+
+// app.use("/swagger", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+
+const PORT = process.env.PORT;
+//Static Files
+app.use(express.static(path.join(__dirname, "public")));
+app.listen(PORT, () => {
+   console.log(`App Started on ${PORT} : ${process.env.NODE_ENV}`);
+});

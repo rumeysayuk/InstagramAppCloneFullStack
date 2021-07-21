@@ -2,7 +2,7 @@ import apiAxios from "../lib/axios/apiAxios";
 
 export const getAllPosts = () => apiAxios.get("posts");
 
-export const signIn = (formData) => apiAxios.post("users/signin", formData)
+export const signIn = (formData) => apiAxios.post("users/signin", formData);
 export const signUp = (formData) => apiAxios.post("users/signup", formData);
 
 export const addPost = (formData) => apiAxios.post("posts/addpost", formData)

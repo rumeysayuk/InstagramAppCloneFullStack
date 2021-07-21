@@ -7,6 +7,7 @@ import {Provider} from "react-redux";
 import { devToolsEnhancer } from "redux-devtools-extension";
 import { ThemeProvider } from '@material-ui/core/styles';
 import {globalMaterialUITheme} from "./styles/theme";
+import "react-toastify/dist/ReactToastify.min.css";
 
 const store = createStore(reducers, compose(applyMiddleware(thunk), devToolsEnhancer()))
 
