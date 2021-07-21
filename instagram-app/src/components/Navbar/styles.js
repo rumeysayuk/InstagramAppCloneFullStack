@@ -6,7 +6,8 @@ export default makeStyles((theme) => ({
       marginRight: theme.spacing(2),
    },
    appBar: {
-      borderRadius: 15,
+      boxShadow: theme.palette.boxShadows.medium,
+      borderRadius: theme.customs.borderRadius.medium,
       margin: '30px 0',
       display: 'flex',
       justifyContent: 'space-between',

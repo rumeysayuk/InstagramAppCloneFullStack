@@ -3,17 +3,16 @@ import {Button, Container, Grid, Paper, Typography} from "@material-ui/core";
 import styles from "./styles";
 import {useHistory} from "react-router-dom";
 import * as services from "../../../services";
-import {getUserFromLocalStorage} from "../../../services/userServices";
 import * as ROUTES from "../../../constants/routes";
+import {useSelector} from "react-redux";
 
 const PostAdd = () => {
    const classes = styles();
    const [image, setImage] = useState({});
    const [description, setDescription] = useState("");
    const history = useHistory();
+   const {authData} = useSelector(state => state.auth)
    let formData = new FormData();
-
-   const {user} = getUserFromLocalStorage();
 
    const handleChange = (e) => {
       let uploadedImage = e.target.files[0]
@@ -26,7 +25,7 @@ const PostAdd = () => {
       e.preventDefault();
       formData.append("imageUrl", image);
       formData.append("description", description);
-      formData.append("username", user.username)
+      formData.append("postedBy", authData._id)
       services.addPost(formData).then(() => {
          history.push(ROUTES.HOMEPAGE);
       })

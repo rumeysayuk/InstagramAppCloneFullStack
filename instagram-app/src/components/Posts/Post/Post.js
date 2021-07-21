@@ -39,11 +39,11 @@ const Post = ({post}) => {
       })
    }
 
-   const likeUndoLikeComment = (commentId,e) => {
+   const likeUndoLikeComment = (commentId, e) => {
       e.preventDefault()
-      const data = { commentId: commentId, likedBy: authData._id, postId: post._id }
+      const data = {commentId: commentId, likedBy: authData._id, postId: post._id}
 
-      services.likeUndoLikeComment(data).then(response=>{
+      services.likeUndoLikeComment(data).then(response => {
          setComments(response.data.data)
       })
    }
@@ -51,7 +51,6 @@ const Post = ({post}) => {
    useEffect(() => {
       setComments(post.comments);
    }, [])
-
 
    return (
       <Card className={classes.root}>
@@ -62,11 +61,13 @@ const Post = ({post}) => {
                </Avatar>
             }
             action={
-               <IconButton aria-label="settings">
-                  <MoreHoriz/>
-               </IconButton>
+               post.postedBy.username === authData.username && (
+                  <IconButton aria-label="settings">
+                     <MoreHoriz/>
+                  </IconButton>
+               )
             }
-            title={post.username}
+            title={post.postedBy.username}
          />
 
          <CardMedia
@@ -94,24 +95,24 @@ const Post = ({post}) => {
          <CardContent>
             <div style={{display: "flex"}}>
                <Typography style={{marginRight: "15px", fontWeight: "bold"}} variant="body2" color="textPrimary"
-                           component="p">{post.username}  </Typography>
+                           component="p">{post.postedBy.username}  </Typography>
             </div>
             <Typography variant="body2" color="textSecondary" component="p">{post.description}</Typography>
          </CardContent>
          <div className="post__comments" style={{padding: 20}}>
             {comments.map((comment, index) => (
                index < 2 && (
-                  <CommentRow key={comment._id} likeUndoLikeComment={likeUndoLikeComment} comment={comment} />
+                  <CommentRow key={comment._id} likeUndoLikeComment={likeUndoLikeComment} comment={comment}/>
                )
             ))}
          </div>
          <CardContent>
-            <TextField type="text" placeholder={"Yorum yap"} fullWidth multiline value={comment}  maxRows={4}
+            <TextField type="text" placeholder={"Yorum yap"} fullWidth multiline value={comment} maxRows={4}
+                       inputProps={{maxLength: 100}}
                        onChange={(e) => setComment(e.target.value)}
             />
             <br/>
-            <Button type={"submit"} onClick={postComment}
-                    style={{float: "right", margin: "5px"}}>Yorum yap</Button>
+            <Button type={"submit"} onClick={postComment} style={{float: "right", margin: "5px"}}>Yorum yap</Button>
          </CardContent>
       </Card>
    )

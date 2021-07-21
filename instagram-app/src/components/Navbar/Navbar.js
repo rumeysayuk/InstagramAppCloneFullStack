@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {AppBar, Avatar, Button, IconButton, InputBase, Menu, MenuItem, Toolbar, Typography} from "@material-ui/core";
 import {FavoriteBorder, HomeOutlined, ModeCommentOutlined, Search} from "@material-ui/icons";
 import styles from "./styles";
-import "../../style.css"
+import "../../styles/style.css"
 import {Link, useHistory} from "react-router-dom";
 import logo from "../../assets/images/instagram.png"
 import {useDispatch, useSelector} from "react-redux";
@@ -30,7 +30,7 @@ const Navbar = () => {
    }
 
    return (
-      <AppBar className={classes.appBar} position={"static"} color={"inherit"}>
+      <AppBar className={classes.appBar} elevation={0} position={"static"} color={"inherit"}>
          <Link className={classes.brandContainer} to={ROUTES.HOMEPAGE}>
             <img height={"60"} className={classes.image}
                  src={logo}

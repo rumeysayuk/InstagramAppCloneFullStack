@@ -26,5 +26,5 @@ export default makeStyles((theme) => ({
     cardFooter: {
         display: "flex",
         justifyContent: "space-between"
-    }
+    },
 }));

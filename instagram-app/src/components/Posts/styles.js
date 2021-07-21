@@ -4,7 +4,8 @@ export default makeStyles((theme) => ({
     toolbar: theme.mixins.toolbar,
     content: {
         flexGrow: 1,
-        backgroundColor: theme.palette.background.default,
+        boxShadow: theme.palette.boxShadows.medium,
+        borderRadius: theme.customs.borderRadius.medium,
         padding: theme.spacing(3),
         [theme.breakpoints.down('xs')]: {
             padding: 0,

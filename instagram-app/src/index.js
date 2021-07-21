@@ -5,6 +5,11 @@ import thunk from "redux-thunk";
 import reducers from "./store/reducers"
 import {Provider} from "react-redux";
 import { devToolsEnhancer } from "redux-devtools-extension";
+import { ThemeProvider } from '@material-ui/core/styles';
+import {globalMaterialUITheme} from "./styles/theme";
 
 const store = createStore(reducers, compose(applyMiddleware(thunk), devToolsEnhancer()))
-ReactDom.render(<Provider store={store}> <App/></Provider>, document.getElementById("root"))
+
+ReactDom.render(<ThemeProvider theme={globalMaterialUITheme}>
+   <Provider store={store}> <App/></Provider>
+</ThemeProvider> , document.getElementById("root"))

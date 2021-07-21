@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Post from "./Post/Post";
 import {CircularProgress, Grid} from "@material-ui/core";
@@ -10,7 +9,7 @@ const Posts = () => {
     const posts = useSelector((state) => state.posts);
     return !posts.length ? <CircularProgress/> : (
         <main className={classes.content}>
-            <div className={classes.toolbar}/>
+            {/*<div className={classes.toolbar}/>*/}
             <Grid container  spacing={3}
                   className={classes.container} item xs={12} sm={12} md={12} lg={12}>
                 {

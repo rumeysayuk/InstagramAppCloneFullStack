@@ -9,6 +9,7 @@ import * as actionTypes from "./store/actionTypes/actionTypes";
 import Posts from "./components/Posts/Posts";
 import * as ROUTES from "./constants/routes";
 import NotFound from "./components/NotFound/NotFound";
+import PostAdd from "./components/Posts/post-add/Post-add";
 
 const App = () => {
    const dispatch = useDispatch();
@@ -29,9 +30,9 @@ const App = () => {
          <Container maxWidth={"lg"}>
             <Navbar/>
             <Switch>
-               {/*<ProtectedRoute user={user} path="/postadd" exact><PostAdd/></ProtectedRoute>*/}
                {/*<ProtectedRoute authData={authData} path="/" exact component={Posts}/>*/}
                <Route path="/" exact component={() => (!authData ? <Auth/> : <Posts />)}/>
+               <Route path="/postadd" exact component={() => (!authData ? <Auth/> : <PostAdd />)}/>
                <Route path={"/auth"} component={() => (authData ? <Redirect to={ROUTES.HOMEPAGE} /> : <Auth />)}/>
                <Route component={NotFound} />
                {/*<Route component={() => <Redirect to="/"/>}/>*/}

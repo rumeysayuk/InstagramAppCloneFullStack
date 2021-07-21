@@ -4,7 +4,7 @@ const User = require('../models/User');
 const mongoose = require("mongoose")
 
 const getAllPosts = async (req, res) => {
-   const posts = await Post.find().populate("comments.postedBy").populate("comments.likes.likedBy")
+   const posts = await Post.find().populate("postedBy").populate("comments.postedBy").populate("comments.likes.likedBy")
    // post.populate("comments.postedBy").execPopulate().then(response=>{
    //     return res.status(201).json({message: "yorum başarılı", data: response.comments})
    // })
