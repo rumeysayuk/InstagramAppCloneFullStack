@@ -10,8 +10,7 @@ import Posts from "./components/Posts/Posts";
 import * as ROUTES from "./constants/routes";
 import NotFound from "./components/NotFound/NotFound";
 import PostAdd from "./components/Posts/post-add/Post-add";
-import {ToastContainer} from "react-toastify";
-import {Flip} from 'react-toastify';
+import {ToastContainer,Flip} from "react-toastify";
 import Profile from "./pages/profile/Profile";
 
 const App = () => {
