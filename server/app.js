@@ -11,11 +11,12 @@ const routes = require("./routes")
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const databaseConnectionHelper = require("./helpers/database/databaseConnectionHelper")
+const databaseConnectionHelper = require("./crossCuttingConcerns/helpers/database/databaseConnectionHelper")
 const path = require("path");
 const swaggerUI = require("swagger-ui-express");
 const swaggerDocument = require('./lib/swagger.json');
-const customErrorHandler = require("./middlewares/errors/customErrorHandler");
+const customErrorHandler = require("./crossCuttingConcerns/middlewares/errors/customErrorHandler");
+const {setPostsToCache} = require("./crossCuttingConcerns/caching/postCacheManager");
 
 // let store = new mongoDbStore({
 //     uri: databaseConnectionHelper,
@@ -55,7 +56,6 @@ app.use(bodyParser.json({limit: "30mb", extended: true}))
 // app.use(csurf());
 app.use("/api", routes);
 app.use(customErrorHandler);
-
 // app.use("/swagger", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 const PORT = process.env.PORT;
