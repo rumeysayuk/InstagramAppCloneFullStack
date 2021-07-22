@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {AppBar, Avatar, Button, IconButton, InputBase, Menu, MenuItem, Toolbar, Typography} from "@material-ui/core";
+import React, {useState} from 'react';
+import {AppBar, Avatar, Button, IconButton,InputBase,Toolbar} from "@material-ui/core";
 import {FavoriteBorder, HomeOutlined, ModeCommentOutlined, Search} from "@material-ui/icons";
 import styles from "./styles";
 import "../../styles/style.css"

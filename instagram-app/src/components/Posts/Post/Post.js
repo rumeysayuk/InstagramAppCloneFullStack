@@ -14,14 +14,13 @@ import {
 import useStyles from "./styles";
 import {
    BookmarkBorderOutlined,
-   ChatBubbleOutlineRounded, Favorite,
-   FavoriteBorder, FavoriteOutlined, FavoriteSharp,
+   ChatBubbleOutlineRounded,
+   FavoriteBorder,
    MoreHoriz,
    SendRounded
 } from "@material-ui/icons";
-import * as services from "../../../services";
+import * as postService from "../../../services/postService";
 import {useSelector} from "react-redux";
-import {capitalizeFirstLetter} from "../../../helpers/capitalizeFirstLetter";
 import CommentRow from "./CommentRow";
 
 const Post = ({post}) => {
@@ -33,7 +32,7 @@ const Post = ({post}) => {
    const postComment = (e) => {
       e.preventDefault();
       const formValues = {text: comment, postedBy: authData._id, postId: post._id}
-      services.addComment(formValues).then(response => {
+      postService.addComment(formValues).then(response => {
          setComments(response.data.data);
          setComment("");
       })
@@ -43,7 +42,7 @@ const Post = ({post}) => {
       e.preventDefault()
       const data = {commentId: commentId, likedBy: authData._id, postId: post._id}
 
-      services.likeUndoLikeComment(data).then(response => {
+      postService.likeUndoLikeComment(data).then(response => {
          setComments(response.data.data)
       })
    }

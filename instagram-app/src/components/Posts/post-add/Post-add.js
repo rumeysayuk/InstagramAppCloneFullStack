@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Button, Container, Grid, Paper, Typography} from "@material-ui/core";
 import styles from "./styles";
 import {useHistory} from "react-router-dom";
-import * as services from "../../../services";
+import * as postService from "../../../services/postService";
 import * as ROUTES from "../../../constants/routes";
 import {useSelector} from "react-redux";
 
@@ -26,7 +26,7 @@ const PostAdd = () => {
       formData.append("imageUrl", image);
       formData.append("description", description);
       formData.append("postedBy", authData._id)
-      services.addPost(formData).then(() => {
+      postService.addPost(formData).then(() => {
          history.push(ROUTES.HOMEPAGE);
       })
    }
