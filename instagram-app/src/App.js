@@ -15,15 +15,14 @@ import Profile from "./pages/profile/Profile";
 import BackToTop from "./components/Toolbox/BackToTop";
 import {AddCircleOutlined} from "@material-ui/icons";
 import {makeStyles} from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
    paper: {
       position: 'absolute',
       width: 600,
       height: 300,
-      backgroundColor: theme.palette.background.paper,
       boxShadow: theme.palette.boxShadows.medium,
-      padding: theme.spacing(2, 4, 3),
    },
 }));
 
@@ -34,6 +33,7 @@ const App = () => {
    const user = JSON.parse(localStorage.getItem("profile"));
    const [open, setOpen] = useState(false);
    const classes = useStyles();
+   const matches = useMediaQuery(theme => theme.breakpoints.down('sm'));
 
    const handleOpen = () => {
       setOpen(true);
@@ -42,7 +42,6 @@ const App = () => {
    const handleClose = () => {
       setOpen(false);
    };
-
 
    useEffect(() => {
       dispatch(getAllPosts())
@@ -54,12 +53,7 @@ const App = () => {
 
    return (
       <BrowserRouter>
-         <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-         >
+         <Modal open={open} onClose={handleClose}>
             <div style={{top: `50%`, left: `50%`, transform: `translate(-50%, -50%)`}} className={classes.paper}>
                <PostAdd handleClose={handleClose}/>
             </div>
@@ -68,11 +62,17 @@ const App = () => {
          <Container maxWidth={"lg"}>
             <Navbar/>
             <div id="back-to-top-anchor"/>
-            <div style={{display: "flex", alignItems: "center", position: "fixed", bottom: "33px", marginLeft: "10px"}}>
+            <div style={{
+               display: authData ? "flex" : "none",
+               alignItems: "center",
+               position: "fixed",
+               bottom: "33px",
+               marginLeft: "10px"
+            }}>
                <IconButton color="inherit" onClick={handleOpen}>
                   <AddCircleOutlined style={{fontSize: 40}}/>
                </IconButton>
-               <Typography variant="body1">Yeni Post Ekle</Typography>
+               <Typography style={{display: matches && "none"}} variant="body1">Yeni Post Ekle</Typography>
             </div>
             <Switch>
                {/*<ProtectedRoute authData={authData} path="/" exact component={Posts}/>*/}
