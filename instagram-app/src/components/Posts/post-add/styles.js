@@ -2,7 +2,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
     form: {
-        width: '100%', // Fix IE 11 issue.
+        width: '100%',
         marginTop: theme.spacing(6),
     },
     title:{
@@ -10,8 +10,7 @@ export default makeStyles((theme) => ({
         textAlign:"center"
     },
     submit: {
-        margin: theme.spacing(8, 0, 2),
-        marginRight:'38px',
-        marginLeft:'38px'
+        margin: theme.spacing(6, "auto", 2, "auto"),
+        width: "60%",
     },
 }));

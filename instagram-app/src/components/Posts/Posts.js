@@ -12,9 +12,9 @@ const Posts = () => {
          {/*<div className={classes.toolbar}/>*/}
          <Grid container spacing={3} className={classes.container} item xs={12} sm={12} md={12} lg={12}>
             {
-               posts.map((post) => (
+               posts.map((post, index) => (
                   <Grid key={post._id} item className={classes.postList}>
-                     <Post post={post} key={post._id}/>
+                     <Post marginBottom={index === posts.length - 1 && true} post={post} key={post._id}/>
                   </Grid>
                ))
             }

@@ -23,7 +23,7 @@ import * as postService from "../../../services/postService";
 import {useSelector} from "react-redux";
 import CommentRow from "./CommentRow";
 
-const Post = ({post}) => {
+const Post = ({post, marginBottom}) => {
    const classes = useStyles();
    const [comment, setComment] = useState("");
    const [comments, setComments] = useState([]);
@@ -52,7 +52,7 @@ const Post = ({post}) => {
    }, [])
 
    return (
-      <Card className={classes.root}>
+      <Card className={classes.root} style={{marginBottom: marginBottom && "50px"}}>
          <CardHeader
             avatar={
                <Avatar aria-label="recipe" className={classes.avatar}

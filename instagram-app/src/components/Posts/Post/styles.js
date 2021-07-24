@@ -5,7 +5,7 @@ export default makeStyles((theme) => ({
         boxShadow: theme.palette.boxShadows.medium,
         borderRadius: theme.customs.borderRadius.medium,
         maxWidth: '100%',
-        width: '100%'
+        width: '100%',
     },
     media: {
         height: 0,
