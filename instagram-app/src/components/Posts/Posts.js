@@ -1,14 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Post from "./Post/Post";
-import {CircularProgress, Grid} from "@material-ui/core";
+import {CircularProgress, Grid, Modal} from "@material-ui/core";
 import useStyles from "./styles";
 import {useSelector} from "react-redux";
+import LeftSideAddPostButton from "../Toolbox/LeftSideAddPostButton";
+import PostAdd from "./post-add/Post-add";
 
 const Posts = () => {
    const classes = useStyles();
    const posts = useSelector((state) => state.posts);
+   const [open, setOpen] = useState(false);
+
+   const handleModalOpen = () => setOpen(true)
+   const handleModalClose = () => setOpen(false);
+
    return !posts.length ? <CircularProgress/> : (
       <main className={classes.content}>
+         <Modal open={open} onClose={handleModalClose}>
+            <div className={classes.modalPaper}>
+               <PostAdd handleClose={handleModalClose}/>
+            </div>
+         </Modal>
+         <LeftSideAddPostButton handleModalOpen={handleModalOpen}/>
          {/*<div className={classes.toolbar}/>*/}
          <Grid container spacing={3} className={classes.container} item xs={12} sm={12} md={12} lg={12}>
             {

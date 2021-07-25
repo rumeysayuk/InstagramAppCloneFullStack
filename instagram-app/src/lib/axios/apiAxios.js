@@ -1,7 +1,7 @@
 import axios from "axios";
 import {toast} from "react-toastify"
 import React from "react";
-import * as localStorageService from "../../services/localStorageService";
+import {getTokenFromLocalStorage, getUserFromLocalStorage} from "../../services/localStorageService";
 
 const apiAxios = axios.create({
     baseURL: "http://localhost:5000/api/",
@@ -14,7 +14,7 @@ apiAxios.interceptors.response.use((response) => response, (error) => {
 });
 
 apiAxios.interceptors.request.use((req) => {
-    const token = localStorageService.getToken();
+    const token = getTokenFromLocalStorage();
     if (token) {
         req.headers.Authorization = `Bearer ${token}`;
     }
@@ -22,7 +22,7 @@ apiAxios.interceptors.request.use((req) => {
 });
 
 apiAxios.interceptors.request.use((req) => {
-    const profile =localStorageService.getUser();
+    const profile = getUserFromLocalStorage();
 
     if (profile) {
         req.user = profile;

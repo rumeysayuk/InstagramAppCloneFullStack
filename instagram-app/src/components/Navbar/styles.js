@@ -27,12 +27,7 @@ export default makeStyles((theme) => ({
          display: "none"
       },
    },
-   rightSearch: {
-      display: "none",
-      [theme.breakpoints.down('sm')]: {
-         display: "block",
-      },
-   },
+
    image: {
       marginLeft: '10px',
       marginTop: '5px',

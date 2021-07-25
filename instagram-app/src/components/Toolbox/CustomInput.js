@@ -2,7 +2,7 @@ import React from 'react';
 import {Grid, IconButton, InputAdornment, TextField} from "@material-ui/core";
 import {Visibility, VisibilityOff} from "@material-ui/icons";
 
-const Input = ({name, handleChange, label, half, autoFocus, type, handleShowPassword}) => (
+const CustomInput = ({name, handleChange, label, half, autoFocus, type, handleShowPassword}) => (
     <Grid item xs={12} sm={half ? 6 : 12}>
         <TextField
             name={name}
@@ -26,4 +26,4 @@ const Input = ({name, handleChange, label, half, autoFocus, type, handleShowPass
     </Grid>
 )
 
-export default Input;
+export default CustomInput;

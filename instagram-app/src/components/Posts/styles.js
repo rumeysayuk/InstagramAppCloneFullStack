@@ -1,6 +1,13 @@
 import {makeStyles} from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
+    modalPaper: {
+        position: 'absolute',
+        width: 600,
+        height: 300,
+        boxShadow: theme.palette.boxShadows.medium,
+        top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+    },
     toolbar: theme.mixins.toolbar,
     content: {
         flexGrow: 1,

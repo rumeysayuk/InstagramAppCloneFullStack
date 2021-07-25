@@ -1,12 +1,16 @@
-export const getUser = () => {
-    return JSON.parse(localStorage.getItem("profile"));
+export const getUserFromLocalStorage = () => {
+   return JSON.parse(localStorage.getItem("profile"));
 }
-export const getToken = () => {
-    return localStorage.getItem("token");
+export const getTokenFromLocalStorage = () => {
+   return localStorage.getItem("token");
 }
-export const addUser = (user) => {
-    localStorage.setItem("profile", JSON.stringify(user));
+export const addUserToLocalStorage = (user) => {
+   if (!getUserFromLocalStorage()) {
+      localStorage.setItem("profile", JSON.stringify(user));
+   }
 }
-export const removeUser = () => {
-    localStorage.removeItem("profile");
+export const removeUserFromLocalStorage = () => {
+   if (getUserFromLocalStorage()) {
+      localStorage.removeItem("profile");
+   }
 }
