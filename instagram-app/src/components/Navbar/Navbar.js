@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {AppBar, Button, InputBase, Toolbar} from "@material-ui/core";
+import {AppBar,InputBase, Toolbar} from "@material-ui/core";
 import {Search} from "@material-ui/icons";
 import styles from "./styles";
 import {Link, useHistory} from "react-router-dom";

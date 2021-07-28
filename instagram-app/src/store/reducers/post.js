@@ -5,7 +5,7 @@ export default (posts = {description: "", image: ""}, action) => {
         case actionTypes.GET_ALL :
             return action.payload
         case actionTypes.ADD_POST:
-            return {posts: action.data};   //************
+            return {posts: action.data};
         default:
             return posts
     }

@@ -1,9 +1,10 @@
 const Post = require("../models/Post")
 const CustomError = require("../crossCuttingConcerns/helpers/error/CustomError");
 const User = require('../models/User');
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const asyncErrorWrapper = require("express-async-handler");
 
-const getAllPosts = async (req, res) => {
+const getAllPosts = asyncErrorWrapper(async (req, res) => {
    const posts = await Post.find().populate("postedBy").populate("comments.postedBy").populate("comments.likes.likedBy")
    // post.populate("comments.postedBy").execPopulate().then(response=>{
    //     return res.status(201).json({message: "yorum başarılı", data: response.comments})
@@ -12,12 +13,12 @@ const getAllPosts = async (req, res) => {
       success: true,
       data: posts
    })
-}
+})
 
-const addPost = async (req, res) => {
+const addPost =asyncErrorWrapper( async (req, res) => {
    const post = await Post.create({
       ...req.body,
-      imageUrl: `http://localhost:5000/postImages/${req.savedProfileImage}`,
+      imageUrl: `http://localhost:5000/postImages/${req.savedPostImage}`,
    });
    post.save().then(() => {
       res.status(201).json({
@@ -25,9 +26,9 @@ const addPost = async (req, res) => {
          post,
       });
    })
-}
+})
 
-const addComment = async (req, res) => {
+const addComment =asyncErrorWrapper( async (req, res) => {
    const {text, postedBy, postId} = req.body;
    // if(!mongoose.Types.ObjectId.isValid(postedBy)) return res.status(404).send(`Bu Id'ye uygun kullanıcı bulunamadı.. ${postedBy}`);
 
@@ -44,9 +45,9 @@ const addComment = async (req, res) => {
    post.populate("comments.postedBy").execPopulate().then(response => {
       return res.status(201).json({message: "yorum başarılı", data: response.comments})
    })
-}
+})
 
-const likeUndoLikeComment = async (req, res) => {
+const likeUndoLikeComment =asyncErrorWrapper( async (req, res) => {
    const {postId, commentId, likedBy} = req.body;
    if (!mongoose.Types.ObjectId.isValid(likedBy)) return res.status(404).send(`Bu Id'ye uygun kullanıcı bulunamadı.. ${likedBy}`);
    const user = await User.findById(likedBy);
@@ -73,7 +74,7 @@ const likeUndoLikeComment = async (req, res) => {
    post.populate("comments.postedBy").populate("comments.likes.likedBy").execPopulate().then(response => {
       return res.status(201).json({message: "yorum başarılı", data: response.comments})
    })
-}
+})
 
 module.exports = {
    getAllPosts,

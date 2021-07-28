@@ -1,20 +1,15 @@
 import React, {useEffect, } from 'react';
 import {getAllPosts} from "./store/actions/posts";
 import {useDispatch, } from "react-redux";
-import Navbar from "./components/Navbar/Navbar";
 import {BrowserRouter, Route, Switch} from "react-router-dom"
 import {Container} from "@material-ui/core";
-import Auth from "./components/Auth/Auth";
 import * as actionTypes from "./store/actionTypes/actionTypes";
-import Posts from "./components/Posts/Posts";
 import * as ROUTES from "./constants/routes";
-import NotFound from "./components/NotFound/NotFound";
-import PostAdd from "./components/Posts/post-add/Post-add";
 import {ToastContainer, Flip} from "react-toastify";
 import Profile from "./pages/profile/Profile";
-import BackToTop from "./components/Toolbox/BackToTop";
 import ProtectedRoute from "./helpers/ProtectedRoute";
 import {getTokenFromLocalStorage, getUserFromLocalStorage} from "./services/localStorageService";
+import {Auth, BackToTop, Navbar, NotFound, PostAdd, Posts} from "./components";
 
 const App = () => {
    const dispatch = useDispatch();

@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
-import Post from "./Post/Post";
 import {CircularProgress, Grid, Modal} from "@material-ui/core";
 import useStyles from "./styles";
 import {useSelector} from "react-redux";
 import LeftSideAddPostButton from "../Toolbox/LeftSideAddPostButton";
-import PostAdd from "./post-add/Post-add";
+import {Post, PostAdd} from "../index";
 
 const Posts = () => {
    const classes = useStyles();

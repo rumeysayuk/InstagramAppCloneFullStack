@@ -3,7 +3,6 @@ const {PASSWORD_MIN_LENGTH_ERROR} = require("../constants/messages/authMessages"
 
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
 const UserSchema = new Schema({
     username: {
         type: String,
@@ -13,12 +12,10 @@ const UserSchema = new Schema({
         type: String,
         required: [true, REQUIRED_ERROR(this)],
     },
-
     lastName: {
         type: String,
         required: [true, REQUIRED_ERROR(this)],
     },
-
     email: {
         type: String,
         required: [true, "Email Alanı Zorunludur"],
@@ -43,6 +40,18 @@ const UserSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    imageUrl: {
+        type: String,
+        required: false,
+        likes: [
+            {
+                likedBy: {
+                    type: mongoose.Types.ObjectId,
+                    ref: "Users",
+                }
+            }
+        ],
     },
 })
 

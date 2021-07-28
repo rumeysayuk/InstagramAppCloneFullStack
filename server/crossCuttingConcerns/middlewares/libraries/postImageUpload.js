@@ -20,11 +20,11 @@ const storage = multer.diskStorage({
    },
    filename: function (req, file, cb) {
       const extension = file.mimetype.split("/")[1];
-      req.savedProfileImage = `image_${Math.random().toString(36).substr(2, 9)}.${extension}`;
-      cb(null, req.savedProfileImage);
+      req.savedPostImage = `image_${Math.random().toString(36).substr(2, 9)}.${extension}`;
+      cb(null, req.savedPostImage);
    },
 });
 
-const profileImageUpload = multer({ storage, fileFilter });
+const postImageUpload = multer({ storage, fileFilter });
 
-module.exports = profileImageUpload;
+module.exports = postImageUpload;

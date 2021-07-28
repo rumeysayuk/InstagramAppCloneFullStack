@@ -1,5 +1,4 @@
 import React from 'react';
-import {capitalizeFirstLetter} from "../../../helpers/capitalizeFirstLetter";
 import {IconButton} from "@material-ui/core";
 import {FavoriteBorder, FavoriteOutlined} from "@material-ui/icons";
 import {useSelector} from "react-redux";

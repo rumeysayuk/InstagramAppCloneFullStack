@@ -3,6 +3,7 @@ import {Avatar} from "@material-ui/core";
 import * as ROUTES from "../../../constants/routes";
 import {useHistory} from "react-router-dom";
 import Icons from "./Icons";
+import {useSelector} from "react-redux";
 
 const SignedIn = ({handleClick}) => {
    const history = useHistory()
@@ -11,13 +12,13 @@ const SignedIn = ({handleClick}) => {
       handleClick(e);
       history.push(ROUTES.PROFILE)
    }
-
+    const {authData} = useSelector(state => state.auth);
    return (
       <>
          <Icons/>
          <Avatar onClick={handleAvatarClick} aria-controls="simple-menu"
                  aria-haspopup="true"
-                 src={"https://i2.milimaj.com/i/milliyet/75/0x0/6009348055427e21f0dcd3b8.jpg"}/>
+                 src={authData.imageUrl}/>
          {/*<Menu*/}
          {/*   anchorEl={anchorEl}*/}
          {/*   keepMounted*/}

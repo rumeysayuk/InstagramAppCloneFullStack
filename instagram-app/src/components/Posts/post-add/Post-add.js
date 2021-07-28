@@ -32,9 +32,7 @@ const PostAdd = ({handleClose}) => {
       })
    }
    return (
-      <Paper
-         elevation={6}
-         style={{width: "100%", height: "100%", display: "flex", alignItems: "center"}}>
+      <Paper elevation={6} style={{width: "100%", height: "100%", display: "flex", alignItems: "center"}}>
          <Grid container spacing={6}>
             <div style={{
                display: "flex",
